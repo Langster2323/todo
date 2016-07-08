@@ -1,13 +1,13 @@
 class ListController < ApplicationController
   def index
-  render List.all.to_json
+  render json: list.all, status: 200
   end
 
   def show
-    if list.exist?
+    if list.exist?(params{list.id})
       render List.all[list_id].to_json, status: 200
     else
-      render_not_found
+      render json: { message: "Not Found" }, status: 404
     end
   end
 
