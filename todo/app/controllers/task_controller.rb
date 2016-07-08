@@ -4,11 +4,11 @@ class TaskController < ApplicationController
   end
 
   def show
-    # if user_exist?
-    #   render User.all[user_id].to_json
-    # else
-    #   render_not_found
-    # end
+    if task.exist?
+      render List.all[task_id].to_json, status: 200
+    else
+      render_not_found
+    end
   end
 
   def create
@@ -19,4 +19,10 @@ class TaskController < ApplicationController
 
   def destroy
   end
+end
+
+private
+
+def render_not_found
+  "404, Not Found"
 end
