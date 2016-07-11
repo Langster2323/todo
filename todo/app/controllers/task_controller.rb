@@ -12,12 +12,26 @@ class TaskController < ApplicationController
   end
 
   def create
+    list = List.new(id: params[:id])
+
+    if list.save
+      render json: list.to_json, status: 200
+    else
+      render json: list.errors.to_json, status: :unprocessable_entity
+    end
   end
 
   def update
+    task = Task.find (params[:id])
   end
 
   def destroy
+    if task.exists?(params[:id])
+      task.destroy(params[:id])
+      render json: { message: "Task destroyed." }, status: 200
+    else
+      render json: { message: "Task not found." }, status: 404
+    end
   end
 end
 

@@ -1,4 +1,4 @@
 class List < ActiveRecord
-  validate :title, presence: true
+  validate :title, length: { maximum: 80, minimum: 2 }
   has_many :task
 end
