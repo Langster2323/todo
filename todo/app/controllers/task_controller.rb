@@ -26,8 +26,8 @@ class TaskController < ApplicationController
   end
 
   def destroy
-    if task.exists?(params[:id])
-      task.destroy(params[:id])
+    if Task.exists?(params[:id])
+      Task.destroy(params[:id])
       render json: { message: "Task destroyed." }, status: 200
     else
       render json: { message: "Task not found." }, status: 404
