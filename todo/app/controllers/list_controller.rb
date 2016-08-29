@@ -1,10 +1,10 @@
 class ListController < ApplicationController
   def index
-  render json: list.all, status: 200
+  render json: List.all, status: 200
   end
 
   def show
-    if list.exist?(params{list.id})
+    if List.exist?(params[:id])
       render List.all[list_id].to_json, status: 200
     else
       render json: { message: "Not Found" }, status: 404
@@ -12,8 +12,7 @@ class ListController < ApplicationController
   end
 
   def create
-    list = List.new(id: params[:id])
-
+    list = List.new
     if list.save
       render json: list.to_json, status: 200
     else
@@ -38,10 +37,4 @@ class ListController < ApplicationController
       render json: { message: "List not found." }, status: 404
     end
   end
-end
-
-private
-
-def render_not_found
-  "404, Not Found"
 end
