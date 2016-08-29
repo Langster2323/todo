@@ -22,7 +22,12 @@ class TaskController < ApplicationController
   end
 
   def update
-    task = Task.find (params[:id])
+    task = Task.find(params[:id])
+    if task.update(body: params[:body], list_id: params[:list_id], completed: params[:completed])
+      render json: task.to_json, status: 200
+    else
+      render json: task.errors.to_json, status: :unprocessable_entity
+    end
   end
 
   def destroy

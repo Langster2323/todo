@@ -22,7 +22,7 @@ class ListController < ApplicationController
 
   def update
     list = List.find (params[:id])
-    if list.update(list_id: params[:list_id], list_id: params[:list_id], quantity: params[:quantity])
+    if list.update(title: params[:id])
       render json: order.to_json, status: 200
     else
       render json: order.errors.to_json, status: :unprocessable_entity
